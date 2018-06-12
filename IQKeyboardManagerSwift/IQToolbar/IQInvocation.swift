@@ -22,20 +22,24 @@
 // THE SOFTWARE.
 
 
-import Foundation
+import UIKit
 
-open class IQInvocation {
-    weak var target: AnyObject?
-    var action: Selector
+public class IQInvocation : NSObject {
+    public weak var target: AnyObject?
+    public var action: Selector
     
-    public init(_ target: AnyObject, _ action: Selector) {
+    @objc public init(_ target: AnyObject, _ action: Selector) {
         self.target = target
         self.action = action
     }
     
-    open func invoke(from: Any) {
+    @objc public func invoke(from: Any) {
         if let target = target {
             UIApplication.shared.sendAction(action, to: target, from: from, for: UIEvent())
         }
+    }
+
+    deinit {
+        target = nil
     }
 }

@@ -29,12 +29,12 @@ open class IQBarButtonItem: UIBarButtonItem {
 
     private static var _classInitialize: Void = classInitialize()
     
-    public override init() {
+    @objc public override init() {
         _ = IQBarButtonItem._classInitialize
           super.init()
       }
 
-    public required init?(coder aDecoder: NSCoder) {
+    @objc public required init?(coder aDecoder: NSCoder) {
         _ = IQBarButtonItem._classInitialize
            super.init(coder: aDecoder)
        }
@@ -59,7 +59,7 @@ open class IQBarButtonItem: UIBarButtonItem {
         appearanceProxy.setBackButtonBackgroundVerticalPositionAdjustment(0, for: .default)
     }
     
-    open override var tintColor: UIColor? {
+    @objc override open var tintColor: UIColor? {
         didSet {
 
             #if swift(>=4)
@@ -98,17 +98,13 @@ open class IQBarButtonItem: UIBarButtonItem {
      */
     @objc internal var isSystemItem = false
     
-//    public override init(barButtonSystemItem systemItem: UIBarButtonSystemItem, target: Any?, action: Selector?) {
-//        return super.init(barButtonSystemItem: systemItem, target: target, action: action)
-//    }
-
     /**
      Additional target & action to do get callback action. Note that setting custom target & selector doesn't affect native functionality, this is just an additional target to get a callback.
      
      @param target Target object.
      @param action Target Selector.
      */
-    open func setTarget(_ target: AnyObject?, action: Selector?) {
+    @objc open func setTarget(_ target: AnyObject?, action: Selector?) {
         if let target = target, let action = action {
             invocation = IQInvocation(target, action)
         } else {
@@ -119,11 +115,10 @@ open class IQBarButtonItem: UIBarButtonItem {
     /**
      Customized Invocation to be called when button is pressed. invocation is internally created using setTarget:action: method.
      */
-    open var invocation : IQInvocation?
+    @objc open var invocation : IQInvocation?
     
     deinit {
         target = nil
-        invocation?.target = nil
         invocation = nil
     }
 }
